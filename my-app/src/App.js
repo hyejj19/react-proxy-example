@@ -6,6 +6,8 @@ import DisplayBoard from './components/DisplayBoard';
 import CreateBook from './components/CreateBook';
 import { getAllBooks, createBook } from './services/BookService';
 import Footer from './components/Footer';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import TodoPage from './TodoPage';
 
 function App () {
 
@@ -42,22 +44,27 @@ function App () {
 
   
   return (
-    <div className="main-wrapper">
-      <div className="main">
-        <Header />
-        <CreateBook 
-          bookShelf={bookShelf}
-          onChangeForm={handleOnChangeForm}
-          handleSubmit={handleSubmit}
-        />
-        <DisplayBoard 
-          numberOfBooks={numberOfBooks} 
-          getAllBook={getAllBook} 
-        />
-        <BookTable books={books} />
-        <Footer />
-      </div>
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<div className="main-wrapper">
+        <div className="main">
+          <Header />
+          <CreateBook 
+            bookShelf={bookShelf}
+            onChangeForm={handleOnChangeForm}
+            handleSubmit={handleSubmit}
+          />
+          <DisplayBoard 
+            numberOfBooks={numberOfBooks} 
+            getAllBook={getAllBook} 
+          />
+          <BookTable books={books} />
+          <Footer />
+        </div>
+      </div>}/>
+      <Route path='/todos' element={<TodoPage/>}/>
+    </Routes>
+    </BrowserRouter>
   );
 }
 
